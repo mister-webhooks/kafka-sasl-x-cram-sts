@@ -91,7 +91,7 @@ The client sends:
 [authzid]\0x00[presigned_url]
 ```
 
-as is response to the server. Note that `\0x00` indicates the `NUL` octet, not a literal string sequence.
+as its response to the server. Note that `\0x00` indicates the `NUL` octet, not a literal string sequence.
 
 The `authzid` is the authorization identity the client asserts it has access to. Because fetching a presigned STS
 GetCallerIdentity URL returns the authentication identity used to presign the URL, no separate `authcid` needs
