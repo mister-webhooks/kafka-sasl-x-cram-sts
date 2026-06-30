@@ -42,8 +42,13 @@ public final class URIEvaluator {
       throw new SecurityException("GetCallerIdentity URI must use https");
     }
 
-    if (!(uri.getHost().matches("sts\\.[-a-z0-9]+\\.amazonaws\\.com") || uri.getHost().equals("sts.amazonaws.com"))) {
-      throw new SecurityException("GetCallerIdentity URI must be for sts.*.amazonaws.com or sts.amazonaws.com");
+    boolean isStsURI =
+      uri.getHost().matches("sts\\.[-a-z0-9]+\\.amazonaws\\.com")
+      || uri.getHost().matches("sts\\.[-a-z0-9]+\\.api\\.aws")
+      || uri.getHost().equals("sts.amazonaws.com");
+
+    if (!isStsURI) {
+      throw new SecurityException("GetCallerIdentity URI must be for sts.*.api.aws, sts.*.amazonaws.com, or sts.amazonaws.com");
     }
 
     Set<NameValuePair> actionParams = uri.getQueryParams()
